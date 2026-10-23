@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ethical Hacking – Exam Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;700&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f4;--card:#fff;--tx:#14213d;--mu:#55627a;--ac:#0f766e;--ac2:#e09f1f;--bd:#d9dfe7;--ok:#15803d;--no:#b91c1c;--hl:#fde68a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1117;--card:#161b24;--tx:#e6edf3;--mu:#9aa7ba;--ac:#5eead4;--ac2:#fbbf24;--bd:#2a3342;--ok:#4ade80;--no:#f87171;--hl:#5b4a10;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1117;--card:#161b24;--tx:#e6edf3;--mu:#9aa7ba;--ac:#5eead4;--ac2:#fbbf24;--bd:#2a3342;--ok:#4ade80;--no:#f87171;--hl:#5b4a10;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 "Instrument Sans",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+header{max-width:860px;margin:0 auto;padding:28px 18px 8px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+h1{font:700 clamp(26px,5vw,38px)/1.15 Newsreader,Georgia,serif;margin:0}
+.sub{color:var(--mu);margin:6px 0 0}
+#th{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:8px 14px;cursor:pointer;font:inherit}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--bg);border-bottom:1px solid var(--bd)}
+nav div{max-width:860px;margin:0 auto;padding:8px 18px;display:flex;gap:6px;overflow-x:auto}
+nav button{flex:none;border:0;background:none;color:var(--mu);padding:8px 14px;border-radius:8px;cursor:pointer;font:600 15px inherit;font-family:inherit}
+nav button.on{background:var(--ac);color:var(--bg)}
+main{max-width:860px;margin:0 auto;padding:18px}
+section{display:none}section.on{display:block}
+details{background:var(--card);border:1px solid var(--bd);border-radius:10px;margin:0 0 12px}
+summary{cursor:pointer;padding:14px 16px;font:700 19px Newsreader,Georgia,serif;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--ac);font-size:22px;line-height:1}details[open]>summary::after{content:"–"}
+.b{padding:0 16px 14px;border-top:1px solid var(--bd)}
+.b p,.b li{max-width:70ch}ul{padding-left:20px}
+mark{background:var(--hl);color:inherit;padding:0 3px;border-radius:3px}
+.tip{border-left:4px solid var(--ac2);padding:8px 12px;margin:10px 0;background:var(--bg);border-radius:0 8px 8px 0}
+.trap{border-left-color:var(--no)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:7px 10px;text-align:left;vertical-align:top}th{background:var(--bg)}
+code{background:var(--bg);padding:1px 6px;border-radius:5px;font-size:.92em}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:0 0 14px}
+.q p{margin:0 0 8px;font-weight:600}
+.o{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit;cursor:pointer;transition:background .2s,border-color .2s}
+.o:hover{border-color:var(--ac)}.o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,var(--bg))}.o.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 18%,var(--bg))}
+.ex{display:none;margin-top:8px;color:var(--mu)}.ex.on{display:block}
+.lv{font-size:13px;color:var(--mu);font-weight:400}
+#sc{position:sticky;top:60px;background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;margin-bottom:14px;display:flex;justify-content:space-between;z-index:5}
+.btn{border:1px solid var(--ac);background:none;color:var(--ac);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><div><h1>Ethical Hacking: Exam Prep</h1><p class="sub">Lectures 2 &amp; 3 · hacker types, ethics, methodology, information gathering, Google hacking</p></div><button id="th">Dark / Light</button></header>
+<nav><div id="nav"></div></nav>
+<main>
+<section id="explain"></section><section id="summary"></section><section id="memory"></section>
+<section id="mcq"></section><section id="written"></section><section id="rev"></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const T=[["explain","Explanation"],["summary","Summary"],["memory","Memory"],["mcq","MCQs"],["written","Written"],["rev","Revision"]];
+$("#nav").innerHTML=T.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id==id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t==id));scrollTo(0,0)}
+$("#nav").onclick=e=>{if(e.target.dataset.t)show(e.target.dataset.t)};
+$("#th").onclick=()=>{const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.dataset.theme=d?"light":"dark"};
+const D=(t,h,o)=>`<details ${o?"open":""}><summary>${t}</summary><div class="b">${h}</div></details>`;
+
+/* ---------- EXPLANATION ---------- */
+const E=[
+["1. What are ethical hackers?",`<p>Ethical hackers are hired (by <b>contract</b> or <b>direct employment</b>) to <mark>test an organization’s security</mark>. They use the <b>same skills and tactics</b> as attackers, but with <mark>permission from the system owner</mark>.</p><ul><li>Their <b>contract</b> says what is <b>off-limits</b> and what they must do.</li><li>Their role depends on the organization’s needs; some firms keep a <b>team on staff</b> for this.</li></ul><div class="tip"><b>Analogy:</b> a locksmith hired to break into your house to show you which lock is weak. Same skill as a burglar, but with the owner’s written permission.</div>`],
+["2. Types of hackers",`<table><tr><th>Type</th><th>Key description</th></tr><tr><td><b>Script Kiddies</b></td><td>Limited or no training; know only <b>basic tools/techniques</b>; may not understand what they are doing.</td></tr><tr><td><b>White-Hat</b></td><td>Think like attackers but work for the good side; follow a <b>code of ethics (cause no harm)</b>. Also called <b>ethical hackers / pen testers</b>.</td></tr><tr><td><b>Gray-Hat</b></td><td>Straddle good and bad; have <b>decided to reform</b> and join the good side, but may <b>still not be fully trusted</b>.</td></tr><tr><td><b>Black-Hat</b></td><td>The “bad guys” on the <b>opposite side of the law</b>; may or may not have an agenda; close to <b>criminal activity</b>.</td></tr><tr><td><b>Suicide Hackers</b></td><td>Try to <b>knock out a target to prove a point</b>; <b>not stealthy</b>; don’t care about being caught or prison.</td></tr></table><div class="tip trap"><b>Trap:</b> Pen testing = white-hat. Gray-hat = <i>reformed</i> (per the slides), not “permission-based”.</div>`],
+["3. Code of conduct and ethics (10 rules)",`<ol><li>Keep <b>private and confidential</b> information gained at work.</li><li>Protect <b>others’ intellectual property</b>; rely on your own innovation.</li><li><b>Disclose</b> potential dangers to e-commerce clients, the Internet community or the public to the proper authorities.</li><li>Never knowingly use software/processes obtained <b>illegally or unethically</b>.</li><li>No <b>deceptive financial practices</b> (bribery, double billing…).</li><li>Don’t <b>associate with malicious hackers</b> or take part in malicious activity.</li><li>Ensure all pen testing is <b>authorized and within legal limits</b>.</li><li>No part in <b>black-hat activity</b> or its community.</li><li>No <b>misleading use of certifications</b>, marks or logos.</li><li>Not in violation of any law or have <b>previous conviction</b>.</li></ol><div class="tip">Group them: <b>Confidentiality (1)</b> · <b>Integrity (2,4,5,9)</b> · <b>Legality (7,10)</b> · <b>Company you keep (6,8)</b> · <b>Duty to warn (3)</b>.</div>`],
+["4. Hacking language (vocabulary)",`<table><tr><th>Term</th><th>Meaning</th></tr><tr><td>Hack Value</td><td>A target likely to attract <b>above-average attention</b> from an attacker.</td></tr><tr><td>Target of Evaluation (TOE)</td><td>The system/resource <b>being evaluated</b> for vulnerabilities.</td></tr><tr><td>Attack</td><td>Targeting and <b>actively engaging</b> a TOE.</td></tr><tr><td>Exploit</td><td>A <b>clearly defined way to breach</b> a system’s security.</td></tr><tr><td>Zero Day</td><td>Threat/vulnerability <b>unknown to developers</b> and <b>not yet addressed</b>; serious.</td></tr><tr><td>Security</td><td>State of well-being where <b>only defined actions are allowed</b>.</td></tr><tr><td>Threat</td><td>A <b>potential</b> violation of security.</td></tr><tr><td>Vulnerability</td><td>A <b>weakness</b> that can be attacked and used as an <b>entry point</b>.</td></tr><tr><td>Daisy Chaining</td><td>Several attacks <b>in sequence</b>, each building on the previous result.</td></tr></table><div class="tip trap"><b>Trap:</b> Threat = <i>potential</i> violation; Vulnerability = the <i>weakness</i>; Exploit = the <i>method</i> that uses it.</div>`],
+["5. The hacking steps (big picture)",`<p>Think of a heist: <b>study the building → check the doors → learn who works there → break in → climb to the vault → wipe the cameras → leave a hidden key.</b></p><table><tr><th>Step</th><th>What happens</th></tr><tr><td><b>Footprinting</b></td><td>Mainly <mark>passive</mark> info gathering before active methods: Whois queries, Google searches, job boards, discussion groups.</td></tr><tr><td><b>Scanning</b></td><td>Act on footprinting info with purpose, not “blunder around and set off alarms”.</td></tr><tr><td><b>Enumeration</b></td><td>Extract detailed info found in scanning: usernames, groups, applications, banner settings, auditing info.</td></tr><tr><td><b>System hacking</b></td><td>Plan and execute the attack from enumeration results (pick user accounts, craft attacks from service banners).</td></tr><tr><td><b>Escalation of privilege</b></td><td>Gain rights of higher accounts, e.g. guest → administrator/system.</td></tr><tr><td><b>Covering tracks</b></td><td>Remove evidence: purge log files, destroy clues so the owner can’t tell an attack occurred.</td></tr><tr><td><b>Planting backdoors</b></td><td>Leave something to return later: special accounts, Trojan horses.</td></tr></table>`],
+["6. Ethical hacking phases 1–3 in detail",`<p><b>Phase 1: Footprinting</b> – first phase; gather as much <i>reasonable and useful</i> information about a target as possible: <b>IP ranges, namespaces, employee info, phone numbers, facility info, job info</b>.</p><p><b>Phase 2: Scanning</b> – <mark>active engagement</mark> to get more info; finds which <b>hosts are active</b> and what the <b>network looks like</b>. Tools: <b>pings, ping sweeps, port scans, Tracert</b> (command-line utility that traces the path an IP packet takes to its destination).</p><p><b>Phase 3: Enumeration</b> – <b>systematic probing</b> to get <b>user lists, routing tables, protocols</b>. It is the <mark>transition from outside looking in to the inside</mark>; results feed the attack phase. Typical data: <b>usernames, group info, passwords, hidden shares, device info, network layout, protocol info, server data, service info</b>.</p><div class="tip"><b>Memory:</b> Footprinting = <i>look</i> (passive). Scanning = <i>knock</i> (active). Enumeration = <i>step inside and list</i>.</div>`],
+["7. Information gathering",`<ul><li>Usually the <b>first step of every attack</b>; done <b>before contact</b> with the target.</li><li>General info gathering = all efforts to collect target info.</li><li>Collected data must be <b>analysed and filtered</b>; it is not obvious what will be useful later, so <b>systemize everything</b>.</li><li>Result: a <b>huge dataset</b> with dedicated info (e.g. user lists).</li></ul><p><b>Methods:</b> search engines (simple queries, specific queries = <b>Google hacking</b>, <b>cached data</b> no longer online but restorable); <b>social media</b>; people and companies leak lots of info, which lets us build <b>personal and company profiles</b> and spot <b>key persons</b>.</p><p><b>Simple Google gathering reveals:</b> default website/domain, history and public data (faculties, number of staff), key persons with contact details, important pages, services, news. <b>Pipl.com</b> finds accounts; also net catalogues, academic records, social accounts.</p>`],
+["8. Social media and social engineering",`<p><b>Profile data from social media:</b> work/education, places of living, contact info, family relationships, details, life events, photos, favorites (music, sports, films), friends, timeline data.</p><div class="tip"><b>Example 1 – Isak (private info):</b> posted a check-in at Scandic Hotel Kristiansand. Five days later he got a fake “hotel” email offering a SuperMario Cart game to guests aged 14–24 and asking him to fill a form with his address via a link. He may click the link and hand over his address.</div><div class="tip"><b>Example 2 – Stine (building a profile):</b> listed favorites on Facebook; her favorite singer is Rihanna. The attacker brute-forced her password and found <code>Diamonds2012</code>, then logged in, stole private photos and messaged her friends.</div><p><mark>Everyone can be misled; it is a question of timing and story.</mark> Every piece of information can matter: hackers collect everything and systemize it before planning.</p>`],
+["9. Collecting information from web pages and tools",`<ul><li>Static information can be <b>downloaded all at once</b> (<b>noisy</b> but useful) with tools like <b>wget</b> or <b>HTTrack</b>.</li><li>Use a <b>web data extractor</b> to find emails, phone numbers, metadata, etc.</li><li><b>FOCA</b>: finds documents by extension and mainly extracts <b>metadata and hidden information</b>; documents can be on web pages, downloaded and analysed; also shows technical information.</li></ul>`],
+["10. Google hacking operators",`<p>Typed directly into the normal Google search box.</p><table><tr><th>Operator</th><th>Function</th><th>Syntax</th></tr><tr><td><code>cache</code></td><td>Shows Google’s <b>cached</b> version instead of the current page</td><td>cache:&lt;website&gt;</td></tr><tr><td><code>link</code></td><td>Lists pages that <b>link to</b> the page/site</td><td>link:&lt;website&gt;</td></tr><tr><td><code>info</code></td><td>Presents <b>information about</b> the page</td><td>info:&lt;website&gt;</td></tr><tr><td><code>site</code></td><td><b>Restricts</b> search to a location/domain</td><td>&lt;keyword&gt; site:&lt;website&gt;</td></tr><tr><td><code>allintitle</code></td><td>Pages with keywords in the <b>title</b></td><td>allintitle: &lt;keywords&gt;</td></tr><tr><td><code>allinurl</code></td><td>Results with the query in the <b>URL</b></td><td>allinurl: &lt;keywords&gt;</td></tr></table><p>Smart filtering can reveal “hidden” data: filter to a domain with <b>site</b>; filter to a file type by extension (the slides call it the <b>type</b> keyword; in Google it is usually <code>filetype:</code>). Interesting extensions: <b>doc, xls, txt, conf, inc, sql</b>. Expressions can be <b>combined</b>.</p>`]
+];
+$("#explain").innerHTML=E.map((e,i)=>D(e[0],e[1],i==0)).join("");
+
+/* ---------- SUMMARY ---------- */
+$("#summary").innerHTML=D("High-yield summary",`<ul>
+<li><b>Ethical hacker</b> = same skills, <mark>with permission</mark>; contract defines limits.
+<ul><li>Types: <b>Script kiddie</b> (basic tools) · <b>White</b> (ethical/pen tester) · <b>Gray</b> (reformed, not fully trusted) · <b>Black</b> (criminal) · <b>Suicide</b> (loud, no fear of prison)</li></ul></li>
+<li><b>Ethics</b>: confidentiality, own IP, disclose dangers, no illegal software, no bribery/double billing, no malicious associates, <b>authorized and legal</b>, no black-hat ties, honest use of certificates, no convictions.</li>
+<li><b>Vocabulary</b>: hack value · TOE · attack · exploit · zero day · security · threat (potential) · vulnerability (weakness) · daisy chaining.</li>
+<li><b>Steps</b>: Footprinting → Scanning → Enumeration → System hacking → Escalation of privilege → Covering tracks → Planting backdoors.
+<ul><li>Footprinting: passive; IP ranges, namespaces, employees, phones, facilities, jobs</li><li>Scanning: active; pings, ping sweeps, port scans, Tracert</li><li>Enumeration: outside → inside; usernames, groups, passwords, hidden shares, network layout, services</li></ul></li>
+<li><b>Information gathering</b>: first step; Google, cache, social media; analyse and systemize; build profiles and find key persons.</li>
+<li><b>Social engineering examples</b>: Isak (hotel check-in → fake survey email) · Stine (favorite singer → password <i>Diamonds2012</i>).</li>
+<li><b>Tools</b>: wget/HTTrack (download site, noisy) · web data extractor · FOCA (metadata) · Pipl.com (accounts).</li>
+<li><b>Google operators</b>: cache · link · info · site · allintitle · allinurl · file type.</li></ul>`,1);
+
+/* ---------- MEMORY ---------- */
+$("#memory").innerHTML=D("Mnemonics",`<ul><li><b>Steps:</b> “<b>F</b>ew <b>S</b>mart <b>E</b>ngineers <b>S</b>ometimes <b>E</b>xploit <b>C</b>lever <b>B</b>ackdoors” → Footprinting, Scanning, Enumeration, System hacking, Escalation, Covering tracks, Backdoors.</li><li><b>Hats:</b> Script kiddie = <i>copy-paste</i>; White = <i>permission</i>; Gray = <i>reformed</i>; Black = <i>criminal</i>; Suicide = <i>loud and fearless</i>.</li><li><b>Scanning tools:</b> “<b>P</b>ing, <b>P</b>ing-sweep, <b>P</b>ort, <b>T</b>racert” → 3 P’s and a T.</li><li><b>Google:</b> <b>cache</b> = old copy · <b>link</b> = who links to me · <b>info</b> = page facts · <b>site</b> = stay inside · <b>allintitle/allinurl</b> = where keywords must sit.</li></ul>`,1)+
+D("Compare similar concepts",`<table><tr><th></th><th>Footprinting</th><th>Scanning</th><th>Enumeration</th></tr><tr><td>Nature</td><td>Mostly passive</td><td>Active</td><td>Active, systematic probing</td></tr><tr><td>Goal</td><td>Background on target</td><td>Live hosts, network map</td><td>Users, shares, services</td></tr><tr><td>Examples</td><td>Whois, Google, job boards</td><td>Ping sweep, port scan, Tracert</td><td>Usernames, hidden shares</td></tr></table><br><table><tr><th></th><th>Threat</th><th>Vulnerability</th><th>Exploit</th></tr><tr><td>Is…</td><td>Potential violation</td><td>Weakness / entry point</td><td>Defined way to breach</td></tr></table><br><table><tr><th></th><th>Gray-hat</th><th>Black-hat</th><th>Suicide</th></tr><tr><td>Stance</td><td>Reformed, not fully trusted</td><td>Opposite side of law</td><td>Proves a point, not stealthy</td></tr></table>`)+
+D("Common mistakes and traps",`<div class="tip trap">Footprinting is <b>mainly passive</b>; scanning is <b>active</b>.</div><div class="tip trap">Hidden shares and passwords belong to <b>enumeration</b>, not footprinting.</div><div class="tip trap"><b>link:</b> lists pages that <i>link to</i> a site; it does not show the site’s own links.</div><div class="tip trap"><b>wget/HTTrack</b> are fast but <b>noisy</b>; <b>FOCA</b> targets <b>metadata</b>.</div><div class="tip trap">Covering tracks comes <b>after</b> escalation; backdoors come <b>last</b>.</div><div class="tip trap">Spaced repetition: review this tab after 1 day, 3 days, 7 days, then 14 days. Quiz yourself before reading.</div>`);
+
+/* ---------- MCQs ---------- */
+const M=[
+["Ethical hackers differ from black-hat hackers mainly because they…",["Use different tools","Have permission from the system owner","Work faster","Never use exploits"],1,"Same skills and tactics, but authorized by the owner.","E"],
+["What defines what an ethical hacker may and may not do?",["Their personal ethics","The contract with the client","The Google terms of use","The target’s firewall"],1,"Contracts specify what is off-limits and what is expected.","E"],
+["A hacker with little training who uses basic tools without fully understanding them is a…",["White-hat","Gray-hat","Script kiddie","Suicide hacker"],2,"Script kiddies know only basic techniques or tools.","E"],
+["Which hacker type is also called a pen tester?",["White-hat","Black-hat","Gray-hat","Script kiddie"],0,"White-hats follow a code of ethics and cause no harm.","E"],
+["Which hacker straddles the line and has decided to reform but may not be fully trusted?",["Black-hat","Gray-hat","White-hat","Suicide hacker"],1,"Gray-hats have reformed, but trust is not guaranteed.","M"],
+["Which hacker is NOT stealthy and doesn’t fear prison?",["Black-hat","Script kiddie","Gray-hat","Suicide hacker"],3,"They aim to knock out a target to prove a point.","E"],
+["Which action violates the code of ethics?",["Keeping client data confidential","Associating with malicious hackers","Reporting dangers to authorities","Testing within legal limits"],1,"Rule 6: do not associate with malicious hackers.","E"],
+["“Hack value” describes…",["Cost of a hacking tool","A target attracting above-average attacker attention","A vulnerability score","Payment to a pen tester"],1,"Targets of interest have high hack value.","E"],
+["A system being evaluated for vulnerabilities is the…",["Exploit","Target of Evaluation (TOE)","Daisy chain","Zero day"],1,"TOE = the system or resource under evaluation.","E"],
+["A vulnerability unknown to developers and not yet addressed is a…",["Daisy chain","Threat","Zero day","Backdoor"],2,"Zero day: unknown and unpatched; often serious.","E"],
+["Performing several attacks in sequence, each building on the last, is…",["Daisy chaining","Enumeration","Footprinting","Escalation"],0,"Daisy chaining uses prior results as input.","M"],
+["A weakness that can serve as an entry point is a…",["Threat","Vulnerability","Exploit","Hack value"],1,"A threat is only a potential violation; the weakness is the vulnerability.","M"],
+["Which phase is primarily passive?",["Scanning","Enumeration","Footprinting","Covering tracks"],2,"Footprinting uses mainly passive methods such as Whois and Google.","E"],
+["Which is a footprinting method?",["Port scan","Job board search","Ping sweep","Privilege escalation"],1,"Job boards, Whois, Google and discussion groups are footprinting sources.","M"],
+["Ping sweeps and port scans belong to…",["Footprinting","Scanning","Enumeration","System hacking"],1,"Scanning finds active hosts and network layout.","E"],
+["Tracert is used to…",["Crack passwords","Trace the path an IP packet takes","List users","Delete logs"],1,"It’s the command-line trace-route utility.","M"],
+["Which information is gathered in ENUMERATION but not typically footprinting?",["Phone numbers","Job information","Hidden shares and usernames","Facility information"],2,"Enumeration yields usernames, groups, passwords, hidden shares, services.","H"],
+["Enumeration is best described as…",["Passive research","Transition from outside to inside the system","Deleting evidence","Downloading a site"],1,"It moves you from outside looking in to inside gathering data.","M"],
+["Moving from a guest account up to administrator is…",["Daisy chaining","Escalation of privilege","Footprinting","Enumeration"],1,"Obtaining rights of higher-privileged accounts.","E"],
+["Purging log files to hide an attack is…",["Covering tracks","Scanning","Backdoor planting","Footprinting"],0,"Removing evidence so the owner can’t detect the attack.","E"],
+["Special accounts or Trojan horses left to return later are…",["Exploits","Backdoors","Banners","Hack value"],1,"Planting backdoors enables later re-entry.","E"],
+["Correct order of the later hacking steps?",["Enumeration, escalation, system hacking, covering tracks","System hacking, enumeration, escalation, backdoors","Enumeration, system hacking, escalation, covering tracks","Escalation, enumeration, covering tracks, system hacking"],2,"Enumeration → system hacking → escalation → covering tracks → backdoors.","H"],
+["Isak’s fake “hotel” email worked mainly because…",["He used a weak password","His check-in post gave the attacker a believable story","The hotel was hacked","He used public WiFi"],1,"Public check-in info enabled targeted social engineering.","M"],
+["Why was Stine’s password guessable?",["It was random","Her profile listed favorites (Rihanna) that shaped it","She reused it for banking","It was too long"],1,"Profile favorites help build password guesses; brute force then found Diamonds2012.","M"],
+["Which tool mainly finds metadata and hidden info in documents?",["wget","HTTrack","FOCA","Tracert"],2,"FOCA analyses documents for metadata and technical information.","E"],
+["Downloading a whole website at once with wget or HTTrack is…",["Silent and invisible","Noisy but useful","Illegal always","Only passive DNS"],1,"Static content downloads in bulk, but it is noisy.","M"],
+["Which Google operator shows the stored version of a page?",["info:","link:","cache:","site:"],2,"cache: shows Google’s cached copy, even if the page is offline.","E"],
+["Which operator lists pages that link to a given site?",["link:","info:","allinurl:","cache:"],0,"link: finds pages with links to the specified site.","M"],
+["Which query restricts results to a domain?",["keyword site:example.com","allintitle: example.com","cache:example.com","info:example.com"],0,"Syntax: <keyword> site:<website>.","M"],
+["allintitle and allinurl differ in that…",["One searches titles, the other URLs","One is for images","Both search only cached pages","They are identical"],0,"allintitle = keywords in title; allinurl = query in URL.","H"]
+];
+let sc=0,dn=0;
+$("#mcq").innerHTML=`<div id="sc"><span>Score: <b id="s1">0</b> / <b id="s2">${M.length}</b></span><button class="btn" id="rs">Reset</button></div>`+M.map((m,i)=>`<div class="q" data-i="${i}"><p>${i+1}. ${m[0]} <span class="lv">(${{E:"easy",M:"medium",H:"hard"}[m[4]]})</span></p>${m[1].map((o,j)=>`<button class="o" data-j="${j}">${"ABCD"[j]}. ${o}</button>`).join("")}<div class="ex"><b>Answer: ${"ABCD"[m[2]]}.</b> ${m[3]}</div></div>`).join("");
+$("#mcq").onclick=e=>{
+ if(e.target.id=="rs"){sc=0;dn=0;$("#s1").textContent=0;document.querySelectorAll(".o").forEach(o=>o.className="o");document.querySelectorAll(".ex").forEach(x=>x.classList.remove("on"));document.querySelectorAll(".q").forEach(q=>q.dataset.d="");return}
+ const o=e.target.closest(".o");if(!o)return;const q=o.closest(".q");if(q.dataset.d)return;q.dataset.d=1;
+ const m=M[q.dataset.i],j=+o.dataset.j;
+ q.querySelectorAll(".o").forEach((b,k)=>{if(k==m[2])b.classList.add("ok")});
+ if(j==m[2]){sc++;$("#s1").textContent=sc}else o.classList.add("no");
+ q.querySelector(".ex").classList.add("on")};
+
+/* ---------- WRITTEN ---------- */
+const W=[
+["Short: Define ethical hacking and state two things the contract specifies.",`Ethical hacking is testing an organization’s security using the same skills and tactics as attackers, but with the system owner’s permission. The contract states what is off-limits and what the hacker is expected to do.`],
+["Short: Distinguish between a threat, a vulnerability and an exploit.",`A <b>threat</b> is a potential violation of security. A <b>vulnerability</b> is a weakness that can be attacked and used as an entry point. An <b>exploit</b> is a clearly defined way to breach a system’s security.`],
+["Short: What are Google’s cache:, link: and site: operators used for?",`<b>cache:</b> shows Google’s stored version of a page rather than the current one. <b>link:</b> lists pages that link to the specified page/site. <b>site:</b> restricts a keyword search to a given website/domain, e.g. <i>keyword site:website</i>.`],
+["Long: Compare the five types of hackers.",`<p>Script kiddies have little or no training and use basic tools without full understanding. White-hat hackers think like attackers but work for the good side under a code of ethics to cause no harm; they are also called ethical hackers or pen testers. Gray-hat hackers straddle good and bad and have decided to reform, though they may not be fully trusted. Black-hat hackers operate on the opposite side of the law, with or without an agenda, and are close to outright criminals. Suicide hackers aim to knock out a target to prove a point, are not stealthy, and do not worry about being caught or imprisoned.</p>`],
+["Long: Describe the three early phases of ethical hacking (footprinting, scanning, enumeration).",`<p><b>Footprinting</b> is the first phase and is mainly passive. Its goal is to collect useful information such as IP ranges, namespaces, employee information, phone numbers, facility and job information, using Whois, Google, job boards and discussion groups.</p><p><b>Scanning</b> is an active engagement that identifies which hosts are alive and what the network looks like, using pings, ping sweeps, port scans and Tracert (which traces an IP packet’s path).</p><p><b>Enumeration</b> is systematic probing that moves from outside to inside the system to extract usernames, groups, passwords, hidden shares, device, network, protocol, server and service information, which feeds the attack phase.</p>`],
+["Long: Explain how social media supports social engineering, using the Isak and Stine examples.",`<p>People publish work, education, location, family, photos, favorites, friends and life events. Attackers collect and systemize this into a personal profile and craft believable stories.</p><p><b>Isak:</b> his hotel check-in told the attacker where he stayed, so a fake hotel email offered a game and asked for his address via a link, risking malware and loss of personal data.</p><p><b>Stine:</b> her listed favorite singer, Rihanna, helped the attacker brute-force a password (Diamonds2012), leading to stolen photos and messages sent to her friends.</p><p>Conclusion: everyone can be misled; it is a question of timing and story, and every piece of information may matter.</p>`]
+];
+$("#written").innerHTML=W.map(w=>D(w[0],w[1])).join("")+`<p class="sub">Try writing your own answer first, then open the model answer.</p>`;
+
+/* ---------- REVISION ---------- */
+$("#rev").innerHTML=D("Night-before cheat sheet",`<ul>
+<li><b>Ethical hacker</b> = attacker skills + <mark>owner’s permission</mark> + contract limits.</li>
+<li><b>Hats:</b> Script kiddie (basic tools) · White (pen tester) · Gray (reformed, not fully trusted) · Black (criminal) · Suicide (loud, proves point).</li>
+<li><b>Ethics keywords:</b> confidential · own IP · disclose dangers · no illegal software · no bribery · no malicious ties · authorized + legal · no black-hat · honest certs · no convictions.</li>
+<li><b>Terms:</b> Hack value (attention) · TOE (evaluated) · Attack (engage TOE) · Exploit (way to breach) · Zero day (unknown, unpatched) · Security (only defined actions) · Threat (potential) · Vulnerability (weakness) · Daisy chaining (sequence).</li>
+<li><b>7 steps:</b> Footprinting → Scanning → Enumeration → System hacking → Escalation → Covering tracks → Backdoors.</li>
+<li><b>Footprinting</b> (passive): IP ranges, namespaces, employees, phones, facility, jobs.</li>
+<li><b>Scanning</b> (active): ping, ping sweep, port scan, Tracert.</li>
+<li><b>Enumeration:</b> usernames, groups, passwords, hidden shares, devices, network layout, protocols, servers, services.</li>
+<li><b>Info gathering:</b> Google, cache, social media, systemize data, profile + key persons. Pipl.com = accounts.</li>
+<li><b>Social engineering:</b> Isak (check-in → fake email); Stine (favorites → password).</li>
+<li><b>Tools:</b> wget/HTTrack (noisy bulk download) · web data extractor · FOCA (metadata).</li>
+<li><b>Google:</b> cache: · link: · info: · site: · allintitle: · allinurl: · file type (doc, xls, txt, conf, inc, sql). Combine them.</li></ul>
+<div class="tip"><b>Last check:</b> Can you recite the 7 steps, the 5 hats and the 6 operators from memory? If yes, take the MCQ tab again.</div>`,1);
+show("explain");
+</script></body></html>
