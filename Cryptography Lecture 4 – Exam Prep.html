@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cryptography Lecture 4 – Exam Prep</title>
+<style>
+:root{--bg:#f7f8fb;--card:#fff;--tx:#1b1f2a;--mut:#5b6475;--ac:#4f46e5;--acs:#eef0ff;--ok:#15803d;--oks:#e7f6ec;--bad:#b91c1c;--bads:#fdeaea;--hi:#fff3b0;--bd:#e3e6ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1218;--card:#181c25;--tx:#e7eaf2;--mut:#9aa3b5;--ac:#8b86ff;--acs:#23274a;--ok:#4ade80;--oks:#12301f;--bad:#f87171;--bads:#3a1717;--hi:#5a4b00;--bd:#2a3040}}
+:root[data-theme="dark"]{--bg:#0f1218;--card:#181c25;--tx:#e7eaf2;--mut:#9aa3b5;--ac:#8b86ff;--acs:#23274a;--ok:#4ade80;--oks:#12301f;--bad:#f87171;--bads:#3a1717;--hi:#5a4b00;--bd:#2a3040}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--bd)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--card);z-index:10}
+.bar{max-width:900px;margin:auto;padding:10px 16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+h1{font-size:1.05rem;margin:0}
+nav{max-width:900px;margin:auto;padding:0 16px 10px;display:flex;gap:6px;overflow-x:auto}
+nav button,.tg{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:999px;cursor:pointer;font:inherit;font-size:.9rem;white-space:nowrap;transition:.2s}
+nav button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+main{max-width:900px;margin:auto;padding:18px 16px 60px}
+section{display:none;animation:f .35s ease}section.on{display:block}
+@keyframes f{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+details{background:var(--card);border:1px solid var(--bd);border-radius:12px;margin:0 0 12px;padding:0 16px}
+summary{cursor:pointer;font-weight:650;padding:13px 0;color:var(--ac)}
+details[open] summary{border-bottom:1px solid var(--bd);margin-bottom:10px}
+details>div,details>ul,details>table{margin-bottom:14px}
+mark{background:var(--hi);color:inherit;padding:0 3px;border-radius:3px}
+.def{border-left:4px solid var(--ac);background:var(--acs);padding:8px 12px;border-radius:0 8px 8px 0;margin:8px 0}
+.an{border-left:4px solid var(--ok);background:var(--oks);padding:8px 12px;border-radius:0 8px 8px 0;margin:8px 0}
+.tr{border-left:4px solid var(--bad);background:var(--bads);padding:8px 12px;border-radius:0 8px 8px 0;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem;display:block;overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:7px 10px;text-align:left;vertical-align:top}th{background:var(--acs)}
+.q{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.q p{margin:0 0 8px;font-weight:600}
+.o{display:block;width:100%;text-align:left;margin:6px 0;padding:9px 12px;border:1px solid var(--bd);border-radius:9px;background:var(--bg);color:var(--tx);cursor:pointer;font:inherit;transition:.2s}
+.o:hover{border-color:var(--ac)}.o.c{background:var(--oks);border-color:var(--ok)}.o.w{background:var(--bads);border-color:var(--bad)}
+.ex{display:none;margin-top:8px;font-size:.93rem;color:var(--mut)}.ex.s{display:block;animation:f .3s}
+.sc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px);background:var(--ac);color:#fff;padding:6px 14px;border-radius:999px;display:inline-block;margin-bottom:12px;font-size:.9rem;z-index:4}
+.model{display:none;background:var(--oks);border-radius:8px;padding:10px 14px;margin-top:8px}.model.s{display:block}
+.tg{margin-top:6px}
+.sheet{border:2px dashed var(--ac);border-radius:14px;padding:6px 18px;background:var(--card)}
+h2{margin:0 0 12px}h3{margin:16px 0 4px}
+</style>
+</head>
+<body>
+<header>
+<div class="bar"><h1>🔐 Cryptography · Lecture 4 · Exam Prep</h1><button class="tg" id="th" aria-label="Toggle theme">🌓 Theme</button></div>
+<nav id="nav"></nav>
+</header>
+<main>
+
+<section id="explain" class="on">
+<h2>Deep Explanation</h2>
+<details open><summary>1 · What is cryptography?</summary>
+<div class="def"><b>Cryptography</b> = protection and preservation of <mark>information in all its forms</mark>. Tools evolved; the goal never changed.</div>
+<ul><li><b>Encryption</b> gets by far the most attention (manipulating/protecting information).</li>
+<li><b>Cryptanalysis</b> = unlocking or uncovering the secrets others try to hide or obscure (the attacker/codebreaker side).</li></ul>
+<div class="an">💡 Analogy: cryptography is the lock-maker; cryptanalysis is the lock-picker.</div></details>
+
+<details><summary>2 · History: Egyptian hieroglyphics & the Rosetta Stone</summary>
+<ul><li>Intricate patterns/glyphs of hieroglyphics. Egyptians probably used them <mark>not mainly to hide secrets</mark> but to have a special writing system to <b>commune with their gods and eternity</b>.</li>
+<li>Believed only the <b>royal family and religious orders</b> could fully read/write it.</li>
+<li>The system grew more complex; those who could write it died or turned to other things, so the ability to decipher was <b>lost for a time</b>.</li>
+<li><b>Rosetta Stone</b> = the key that let modern civilization understand a nearly lost language; it took <mark>over 20 years</mark> of concerted effort.</li></ul>
+<div class="tr">⚠️ Trap: hieroglyphics were NOT primarily designed as a secrecy system.</div></details>
+
+<details><summary>3 · Evolution: from protecting to also detecting</summary>
+<p>A major use of cryptography is safeguarding communication between two parties sharing information. Today information must be kept secret <b>and</b> unwelcome modifications must be detectable. In its first generations cryptography only protected information; that has changed.</p></details>
+
+<details><summary>4 · The five goals (C-I-A-N-K)</summary>
+<table><tr><th>Goal</th><th>Meaning</th><th>Example / note</th></tr>
+<tr><td><b>Confidentiality</b></td><td>Primary goal of encryption: keep secrets from disclosure, away from prying eyes</td><td>Encrypting a message</td></tr>
+<tr><td><b>Integrity</b></td><td>Detect changes; prove original, unmodified state</td><td>Hashing</td></tr>
+<tr><td><b>Authentication</b></td><td>Identify a person/object/party with high confidence; lets software be positively identified</td><td>Two-key authentication</td></tr>
+<tr><td><b>Nonrepudiation</b></td><td>Positive identification of the source/originator of an event</td><td>A party to an agreement cannot later deny being its issuer</td></tr>
+<tr><td><b>Key distribution</b></td><td>The key is the most valuable component: the secret combination/code used in a cryptographic function</td><td>Getting keys safely to parties</td></tr></table></details>
+
+<details><summary>5 · How it works: the vocabulary</summary>
+<div class="def"><b>Plain/clear text</b>: the original, unaltered, usable message.</div>
+<div class="def"><b>Cipher text</b>: plain text transformed to another format by an algorithm; reversible using an algorithm and a key.</div>
+<div class="def"><b>Algorithm</b>: a formula of discrete steps describing how encryption and decryption are performed.</div>
+<div class="def"><b>Key</b>: a discrete piece of information, usually random, that determines the output of a cryptographic operation.</div>
+<div class="an">💡 Analogy: plain text = letter; algorithm = the type of safe; key = the combination; cipher text = letter locked inside.</div>
+<p><b>Flow:</b> Plain text → [algorithm + key] → Cipher text → [algorithm + key] → Plain text.</p></details>
+
+<details><summary>6 · Symmetric cryptography</summary>
+<p>The <mark>same key</mark> encrypts and decrypts and <b>must be kept secret</b>.</p>
+<p><b>Strengths:</b> confidentiality; increased speed over many non-symmetric systems; simplicity (relatively); authenticity.<br><b>Drawbacks:</b> key management issues; no nonrepudiation.</p>
+<div class="an">💡 Analogy: one house key copied for everyone. Fast and easy, but you must hand copies out safely, and nobody can prove which copy-holder opened the door.</div></details>
+
+<details><summary>7 · Asymmetric (public-key) cryptography</summary>
+<ul><li>Invented to overcome the <b>key management problems</b> of earlier systems.</li>
+<li>Each enrolled user gets a <b>key pair</b>: <b>public key</b> (published) and <b>private key</b> (secret).</li>
+<li>No shared symmetric key is needed, so it protects against eavesdropping or betrayal.</li>
+<li>Provides <b>nonrepudiation</b>, impossible with symmetric systems.</li></ul>
+<div class="an">💡 Analogy: a public mailbox slot (anyone can drop in) that only you can open with your private key.</div></details>
+
+<details><summary>8 · Digital signatures</summary>
+<p>Anything encrypted with the <b>private key</b> can be reversed <b>only with the matching public key</b>. Only one person holds the private key, so the <mark>identity of the encrypting party is assured</mark>.</p></details>
+
+<details><summary>9 · Hashing</summary>
+<ul><li>A type of <b>one-way “encryption”</b>: scrambled output that <mark>cannot be reversed</mark>. Output = <b>hash / hash value / message digest</b>.</li>
+<li>Used to validate <b>integrity</b>; also <b>password storage</b>.</li>
+<li><b>Fixed-length</b> output regardless of input size.</li>
+<li>Value is unique for each different input, so any change in data of any type is detected.</li></ul>
+<div class="an">💡 Analogy: a fingerprint of a document. Fingerprint can’t rebuild the person, but a different person gives a different print.</div></details>
+
+<details><summary>10 · Issues: brute-force attack</summary>
+<p>All cryptographic systems are vulnerable to <b>brute force</b>: every possible combination of characters is tried to find a valid key.</p></details>
+</section>
+
+<section id="summary">
+<h2>Smart Summary</h2>
+<div class="sheet">
+<ul>
+<li><b>Cryptography</b> = protect &amp; preserve information · <b>Cryptanalysis</b> = break/uncover secrets</li>
+<li><b>History</b>: hieroglyphics (gods/eternity, not secrecy; royals &amp; priests) → knowledge lost → <b>Rosetta Stone</b> (20+ years)</li>
+<li><b>Goals</b>: <mark>Confidentiality · Integrity · Authentication · Nonrepudiation · Key distribution</mark></li>
+<li><b>Terms</b>: plain text → (algorithm + key) → cipher text</li>
+<li><b>Symmetric</b>: one secret key · fast, simple · ✗ key management, ✗ nonrepudiation</li>
+<li><b>Asymmetric</b>: public + private pair · fixes key management · ✓ nonrepudiation</li>
+<li><b>Digital signature</b>: private key encrypts → public key verifies → identity assured</li>
+<li><b>Hash</b>: one-way · fixed length · integrity · passwords</li>
+<li><b>Weakness</b>: brute force (try every key)</li></ul></div>
+</section>
+
+<section id="memory">
+<h2>Memory Optimization</h2>
+<details open><summary>Mnemonics</summary>
+<div class="def"><b>“Cool Imps Always Negotiate Keys”</b> = Confidentiality, Integrity, Authentication, Nonrepudiation, Key distribution.</div>
+<div class="def"><b>Symmetric = “Same”</b> key (S for same). <b>Asymmetric = “A pair”</b>.</div>
+<div class="def"><b>Hash = “Hack-proof reverse”</b>: one-way, fixed length.</div>
+<div class="def"><b>Sign with Private, Verify with Public</b> (“SPVP”).</div></details>
+<details open><summary>Comparison: Symmetric vs Asymmetric</summary>
+<table><tr><th>Feature</th><th>Symmetric</th><th>Asymmetric</th></tr>
+<tr><td>Keys</td><td>One shared secret key</td><td>Public + private pair</td></tr>
+<tr><td>Speed</td><td>Faster</td><td>Slower (relative)</td></tr>
+<tr><td>Key management</td><td>Problem</td><td>Solved</td></tr>
+<tr><td>Nonrepudiation</td><td>No</td><td>Yes</td></tr>
+<tr><td>Simplicity</td><td>Simpler</td><td>More complex</td></tr></table></details>
+<details open><summary>Comparison: Encryption vs Hashing</summary>
+<table><tr><th></th><th>Encryption</th><th>Hashing</th></tr>
+<tr><td>Reversible?</td><td>Yes (with key)</td><td>No</td></tr>
+<tr><td>Output length</td><td>Varies with data</td><td>Fixed</td></tr>
+<tr><td>Main goal</td><td>Confidentiality</td><td>Integrity</td></tr>
+<tr><td>Typical use</td><td>Secure messages</td><td>Password storage, change detection</td></tr></table></details>
+<details open><summary>Common mistakes &amp; traps</summary>
+<div class="tr">Saying hieroglyphics were made to hide secrets (they were for communing with gods).</div>
+<div class="tr">Saying hashing can be decrypted (it can’t).</div>
+<div class="tr">Confusing public/private roles: the signature uses the <b>private</b> key.</div>
+<div class="tr">Listing speed as a symmetric <i>drawback</i> (it’s a strength).</div>
+<div class="tr">Forgetting nonrepudiation is the symmetric weakness that asymmetric fixes.</div></details>
+<details open><summary>Spaced repetition plan</summary>
+<ul><li><b>Day 0</b>: read Explanation + do MCQs.</li><li><b>Day 1</b>: redo only wrong MCQs; recite goals &amp; mnemonic.</li><li><b>Day 3</b>: write the long answers from memory.</li><li><b>Day 7</b>: Revision Sheet only, then MCQs again.</li></ul>
+<p>Chunks to learn: <b>(1)</b> history · <b>(2)</b> goals · <b>(3)</b> vocabulary · <b>(4)</b> symmetric · <b>(5)</b> asymmetric+signature · <b>(6)</b> hashing+brute force.</p></details>
+</section>
+
+<section id="mcq">
+<h2>Multiple Choice (20)</h2>
+<div class="sc" id="score">Score: 0 / 0</div> <button class="tg" id="rs">Reset</button>
+<div id="qs"></div>
+</section>
+
+<section id="written">
+<h2>Written Questions</h2>
+<div id="wq"></div>
+</section>
+
+<section id="revision">
+<h2>Revision Sheet · Night Before</h2>
+<div class="sheet">
+<h3>Definitions</h3>
+<ul><li><b>Cryptography</b>: protecting/preserving information · <b>Cryptanalysis</b>: uncovering hidden secrets</li>
+<li><b>Plain text</b>: original · <b>Cipher text</b>: transformed by algorithm · <b>Algorithm</b>: discrete steps · <b>Key</b>: random info controlling output</li>
+<li><b>Hash</b>: fixed-length, irreversible digest</li></ul>
+<h3>Rules</h3>
+<ul><li>Goals: <mark>C · I · A · N · K</mark></li>
+<li>Symmetric: same secret key; + speed, simple; − key mgmt, no nonrepudiation</li>
+<li>Asymmetric: public published, private secret; + key mgmt, nonrepudiation</li>
+<li>Signature: private encrypts → public decrypts → identity</li>
+<li>Hash: one-way, fixed length, integrity, passwords</li>
+<li>Brute force: try all keys, hits every system</li>
+<li>Hieroglyphics: for gods/eternity; Rosetta Stone: 20+ years</li></ul>
+<h3>Last-minute checks</h3>
+<ul><li>Can I list the 5 goals with a one-line meaning each?</li><li>Can I compare symmetric vs asymmetric in 4 points?</li><li>Can I explain why hashing can’t be reversed yet detects changes?</li></ul>
+</div>
+</section>
+</main>
+<script>
+var S=[["explain","📖 Explanation"],["summary","📝 Summary"],["memory","🧠 Memory"],["mcq","❓ MCQs"],["written","✍️ Written"],["revision","⚡ Revision"]];
+var nav=document.getElementById("nav");
+S.forEach(function(s){var b=document.createElement("button");b.textContent=s[1];b.dataset.id=s[0];b.onclick=function(){show(s[0])};nav.appendChild(b)});
+function show(id){document.querySelectorAll("section").forEach(function(e){e.classList.toggle("on",e.id===id)});nav.querySelectorAll("button").forEach(function(b){b.classList.toggle("on",b.dataset.id===id)});window.scrollTo({top:0,behavior:"smooth"});try{history.replaceState(null,"","#"+id)}catch(e){}}
+show("explain");
+var th=document.getElementById("th");
+th.onclick=function(){var r=document.documentElement,d=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");var n=d==="dark"?"light":"dark";r.setAttribute("data-theme",n);try{localStorage.setItem("t",n)}catch(e){}};
+try{var t=localStorage.getItem("t");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}
+var Q=[
+["What is the PRIMARY goal that encryption seeks to achieve?",["Integrity","Confidentiality","Nonrepudiation","Key distribution"],1,"Encryption keeps information secret from disclosure: confidentiality."],
+["Which goal lets you detect that information has been modified?",["Integrity","Confidentiality","Authentication","Hashing speed"],0,"Integrity proves the original, unmodified state."],
+["A party signs an agreement and later cannot claim he did not issue it. This is:",["Confidentiality","Integrity","Nonrepudiation","Brute force"],2,"Nonrepudiation gives positive identification of the originator."],
+["Which process creates output that cannot be reversed?",["Symmetric encryption","Asymmetric encryption","Decryption","Hashing"],3,"Hashing is designed as a one-way process."],
+["In symmetric cryptography the key used to decrypt is:",["The public key","The same secret key used to encrypt","A hash of the key","The cipher text"],1,"Symmetric = one shared secret key for both operations."],
+["Which is a DRAWBACK of symmetric algorithms?",["Speed","Simplicity","Key management issues","Confidentiality"],2,"Key management and lack of nonrepudiation are the drawbacks. Speed is a strength."],
+["Which key creates a digital signature?",["Public key","Shared key","Hash key","Private key"],3,"Private-key encryption can be reversed only by the matching public key, proving identity."],
+["Public-key cryptography was designed mainly to overcome:",["Slow hashing","Key management problems","Brute-force attacks","Loss of hieroglyphs"],1,"Public-key systems removed the need for a shared symmetric key."],
+["A hash function’s output length is:",["Proportional to the input","Random","Fixed regardless of input size","Always 1 bit"],2,"Fixed-length value, no matter how large or small the data."],
+["TRICKY: Hashing is commonly used for:",["Reversible message secrecy","Password storage and integrity checking","Sharing symmetric keys","Brute-forcing keys"],1,"Passwords storage and integrity validation are the lecture’s examples."],
+["A brute-force attack:",["Guesses only common words","Tries every possible combination to find a valid key","Modifies the algorithm","Steals the public key"],1,"Every possible combination of characters is tried."],
+["Plain text (clear text) is:",["Encrypted data","The original unaltered, usable message","A hash value","The key"],1,"Plain text has not been altered."],
+["Cipher text is:",["Data transformed by an algorithm, reversible with algorithm and key","A one-way digest","A public key","A random key"],0,"Cipher text can be reversed using an algorithm and a key."],
+["A cryptographic key is best described as:",["A fixed hash","A discrete, usually random piece of information determining the operation’s output","The algorithm itself","Plain text"],1,"The key determines the result of a cryptographic operation."],
+["Cryptanalysis deals with:",["Writing new ciphers","Unlocking or uncovering secrets others try to hide","Distributing keys","Hash design"],1,"Cryptanalysis = breaking/uncovering."],
+["The Rosetta Stone took about how long to reveal the lost language?",["2 years","Over 20 years","Exactly 5 years","It was instant"],1,"Over 20 years of concerted effort."],
+["TRICKY: The ancient Egyptians probably used hieroglyphics mainly to:",["Hide military secrets","Commune with their gods and eternity","Detect modifications","Create digital signatures"],1,"Not so much to withhold secrets but as a special writing system for the gods."],
+["Which goal does “two-key authentication” illustrate?",["Authentication","Hashing","Brute force","Confidentiality"],0,"Authentication identifies a party with high confidence."],
+["HARD: Which feature is possible with asymmetric but NOT symmetric systems?",["Confidentiality","Nonrepudiation","Speed","Using a key"],1,"Only one holder of the private key, so nonrepudiation is possible."],
+["HARD: Which statement about public and private keys is correct?",["Both are published","Public is published; private is kept secret","Private is published; public is secret","Both are shared secretly"],1,"Each person’s public key is published; the private key stays secret."]
+];
+var ans=0,tot=0,sc=document.getElementById("score");
+function build(){ans=0;tot=0;sc.textContent="Score: 0 / 0";var box=document.getElementById("qs");box.innerHTML="";
+Q.forEach(function(q,i){var d=document.createElement("div");d.className="q";var p=document.createElement("p");p.textContent=(i+1)+". "+q[0];d.appendChild(p);var ex=document.createElement("div");ex.className="ex";ex.textContent="Explanation: "+q[3];var done=false;
+q[1].forEach(function(o,j){var b=document.createElement("button");b.className="o";b.textContent=String.fromCharCode(65+j)+". "+o;b.onclick=function(){if(done)return;done=true;tot++;var bs=d.querySelectorAll(".o");bs[q[2]].classList.add("c");if(j===q[2])ans++;else b.classList.add("w");ex.classList.add("s");sc.textContent="Score: "+ans+" / "+tot};d.appendChild(b)});
+d.appendChild(ex);box.appendChild(d)})}
+document.getElementById("rs").onclick=build;build();
+var W=[
+["Short: Define cryptanalysis and contrast it with cryptography. (2 marks)","Cryptography protects and preserves information in all its forms, with encryption receiving most attention. Cryptanalysis is the opposite side: it deals with unlocking or uncovering the secrets that others try to hide or obscure."],
+["Short: What is nonrepudiation and which key type supports it? (2 marks)","Nonrepudiation is the positive identification of the source or originator of an event, so a person in an agreement cannot later deny issuing it. Asymmetric (public-key) cryptography supports it because only one person holds the private key; symmetric systems cannot provide it."],
+["Short: Why is a hash function useful for integrity? (3 marks)","A hash function is one-way and outputs a fixed-length value (hash or message digest) regardless of input size. The value is unique per input, so any change to data produces a different hash and is detected. It is also used for password storage."],
+["Long: Explain the five goals of modern cryptography with examples. (8 marks)","1) Confidentiality: the primary goal of encryption; keeps secret information from disclosure. 2) Integrity: detects changes and proves the original unmodified state, e.g. via hashing. 3) Authentication: identifies a person, object or party with high confidence, e.g. two-key authentication, letting software be positively identified. 4) Nonrepudiation: positive identification of the originator, so someone in an agreement cannot deny issuing it. 5) Key distribution: the key is the most valuable part of a cryptosystem, the specific secret combination or code used in a cryptographic function, so it must be delivered securely. Historically cryptography only protected information; today it must also detect unwelcome modification."],
+["Long: Compare symmetric and asymmetric cryptography. (10 marks)","Symmetric: the same secret key encrypts and decrypts. Strengths: preserves confidentiality, faster than many non-symmetric systems, relatively simple, provides authenticity. Weaknesses: key management issues and no nonrepudiation. Asymmetric (public-key): invented to overcome key management problems. Each user gets a public key (published) and a private key (kept secret), eliminating the need for a shared symmetric key and protecting against eavesdropping or betrayal. It provides nonrepudiation, impossible with symmetric systems, and enables digital signatures: data encrypted with the private key can be reversed only with the matching public key, assuring the signer’s identity. Both types, like all cryptographic systems, are vulnerable to brute-force attack."],
+["Long: Describe hashing, its properties, and how it differs from encryption. (8 marks)","Hashing is a type of one-way encryption: a process creating scrambled output (hash, hash value or message digest) that cannot be reversed. Properties: fixed-length output regardless of input size; unique value for each different input, so any change in any type of data is detected. Uses: validating integrity and storing passwords. Difference: encryption is reversible with an algorithm and key and aims at confidentiality; hashing is irreversible and aims at integrity."]
+];
+var wq=document.getElementById("wq");
+W.forEach(function(w){var d=document.createElement("div");d.className="q";var p=document.createElement("p");p.textContent=w[0];var b=document.createElement("button");b.className="tg";b.textContent="Show model answer";var m=document.createElement("div");m.className="model";m.textContent=w[1];b.onclick=function(){var s=m.classList.toggle("s");b.textContent=s?"Hide model answer":"Show model answer"};d.appendChild(p);d.appendChild(b);d.appendChild(m);wq.appendChild(d)});
+</script>
+</body>
+</html>
